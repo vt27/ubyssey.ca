@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load humanize %}
+{% load widgets %}
+{% block content %}
+{% include 'objects/advertisement.html' with size='leaderboard' name='Leaderboard' id=1 class='homepage' %}
+{% include 'headers/main.html' %}
+{% include 'headers/mobile.html' %}
+<main class="u-container u-container--large homepage">
+    {% zone 'frontpage' articles=articles %}
+    <div class="homepage-section row">
+        <div class="sections">
+            {% include 'homepage/blocks/section_1.html' with section="news" articles=sections.news %}
+            {% include 'homepage/blocks/section_2.html' with section="culture" articles=sections.culture %}
+            {% include 'homepage/blocks/section_2.html' with section="sports" articles=sections.sports %}
+            {% include 'homepage/blocks/section_2.html' with section="opinion" articles=sections.opinion %}
+            {% include 'homepage/blocks/section_2.html' with section="features" articles=sections.features %}
+            {% include 'homepage/blocks/section_2.html' with section="science" articles=sections.science %}
+        </div>
+        <div class="sidebar-home">
+            <div class="sidebar-block sidebar-block--advertisement">
+              {% include 'objects/advertisement.html' with size='box' name='Box_A' id=3 %}
+            </div>
+            <div class="popular sidebar-block">
+                <h2 class="block-title">Most popular this week</h2>
+                <ol class="article-list">
+                    {% for article in popular %}
+                    <li><h4 class="headline"><a href="{{ article.get_absolute_url }}?ref=popular&dur=week">{{ article.headline|safe }}</a></h4></li>
+                    {% endfor %}
+                </ol>
+            </div>
+            <div class="sidebar-block sidebar-block--advertisement">
+              {% include 'objects/advertisement.html' with size='box' name='Box_B' id=4 %}
+            </div>
+            <div class="article-list blog sidebar-block">
+                <h2 class="block-title">From the blog</h2>
+                <ul class="article-list">
+                    {% for article in blog %}
+                    <li>
+                      {% include 'objects/articles/column.html' with article=article padded=True hide_image=True hide_snippet=True hide_byline=True %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="multi-zone cell right">
+              {% zone 'homepage-sidebar-bottom' %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' with homepage=True %}
+{% endblock %}

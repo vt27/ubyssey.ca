@@ -1,0 +1,117 @@
+$adslots: (
+  leaderboard: (728px, 90px),
+  box: (300px, 250px),
+  mobile-leaderboard: (300px, 50px)
+);
+
+// Desktop leaderboard ad
+.o-advertisement--leaderboard {
+  $width: nth(map-get($adslots, leaderboard), 1);
+  $height: nth(map-get($adslots, leaderboard), 2);
+
+  display: none;
+
+  .adslot {
+    margin-left: auto;
+    margin-right: auto;
+    width: $width;
+    height: $height;
+    padding-top: 1.5rem;
+  }
+
+  &.o-advertisement--homepage {
+    .adslot {
+      padding-top: 1.5rem;
+    }
+  }
+
+  @media(min-width: $width + 40) {
+    display: block;
+    &.o-advertisement--homepage {
+      display: none;
+    }
+  }
+
+  @media($bp-larger-than-tablet){
+    &.o-advertisement--homepage {
+      display: block;
+    }
+  }
+}
+
+main.article .o-advertisement--leaderboard {
+  padding-top: 1rem;
+  .adslot {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.article-slide .o-advertisement--leaderboard,
+.article-slide .o-advertisement--mobile-leaderboard {
+  background: #F5F5F5;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #DADADA;
+}
+
+.article-slide .o-advertisement--leaderboard {
+  margin-bottom: 1rem;
+}
+
+.article-slide .o-advertisement--mobile-leaderboard {
+  margin-bottom: 0.5rem;
+}
+
+
+// Mobile leaderboard ad
+.o-advertisement--mobile-leaderboard {
+  $width: nth(map-get($adslots, mobile-leaderboard), 1);
+  $height: nth(map-get($adslots, mobile-leaderboard), 2);
+
+  $desktop-width: nth(map-get($adslots, leaderboard), 1);
+
+  .adslot {
+    width: $width;
+    height: $height;
+    padding-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media(min-width: $desktop-width + 40) {
+    display: none;
+  }
+}
+
+.o-advertisement--mobile-frontpage-box {
+  // Structure
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  // Border
+  border-bottom: thin dotted #C8C8C8;
+
+  @media($bp-larger-than-phablet) {
+    // Structure
+    display: none;
+  }
+}
+
+.o-advertisement--box {
+  $width: nth(map-get($adslots, box), 1);
+  $height: nth(map-get($adslots, box), 2);
+
+  .adslot {
+    width: $width;
+    min-height: $height;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// Hide ads when printed
+.o-advertisement {
+  @media print {
+    display: none;
+  }
+}
